@@ -43,23 +43,27 @@ namespace ContactPro_Crucible.Data
 		{
 			// obtaining the necessary services based on the IServiceProvider parameter
 			var dbContextSvc = svcProvider.GetRequiredService<ApplicationDbContext>();
-			var userManagerSvc = svcProvider.GetRequiredService<UserManager<AppUser>>();
+			var userManager = svcProvider.GetRequiredService<UserManager<AppUser>>();
+			var configurationSvc = svcProvider.GetRequiredService<IConfiguration>();
 
 			// align the db by checking migrations
 			await dbContextSvc.Database.MigrateAsync();
 
 			//seed demo user(s)
-			await SeedDemoUsersAsync(userManagerSvc);
+			await SeedDemoUsersAsync(userManager, configurationSvc);
 
 		}
 
 		//Demo users Seed Method
-		private static async Task SeedDemoUsersAsync(UserManager<AppUser> userManagerSvc)
+		private static async Task SeedDemoUsersAsync(UserManager<AppUser> userManager, IConfiguration configuration)
 		{
-			AppUser demoUser = new AppUser()
+			string? demoEmail = configuration["DemoLoginEmail"] ?? Environment.GetEnvironmentVariable("DemoLoginEmail");
+            string? demoPassword = configuration["DemoLoginPassword"] ?? Environment.GetEnvironmentVariable("DemoLoginPassword");
+
+            AppUser demoUser = new AppUser()
 			{
-				UserName = "demologin@contactpro.com",
-				Email = "demologin@contactpro.com",
+				UserName = demoEmail,
+				Email = demoPassword,
 				FirstName = "Demo",
 				LastName = "User",
 				EmailConfirmed = true
@@ -67,11 +71,11 @@ namespace ContactPro_Crucible.Data
 
 			try
 			{
-				AppUser? user = await userManagerSvc.FindByEmailAsync(demoUser.Email);
+				AppUser? user = await userManager.FindByEmailAsync(demoUser.Email!);
 
 				if (user == null)
 				{
-					await userManagerSvc.CreateAsync(demoUser,"Abc&123!");
+					await userManager.CreateAsync(demoUser, demoPassword!);
 				}
 			}
 			catch (Exception ex)

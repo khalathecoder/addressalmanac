@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ContactPro_Crucible</title>
+    <title>@ViewData["Title"] - Address Almanac</title>
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -25,11 +25,11 @@
             <div class="container-fluid">
                 @if(!User.Identity!.IsAuthenticated)
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ContactPro</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Address Almanac</a>
                 }
                 else
                 {
-                    <a class="navbar-brand nav-link dropdown-toggle" data-bs-toggle="dropdown">ContactPro</a>
+                    <a class="navbar-brand nav-link dropdown-toggle" data-bs-toggle="dropdown">Address Almanac</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" asp-area="" asp-controller="Contacts" asp-action="Index">My Contacts</a>
                         <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">My Categories</a>
@@ -63,9 +63,9 @@
                 <img src="/img/kw-black-initials.png" height="50" />
             </div>
             <div class="col text-dark text-md-end px-3">
-                <a href="https://linkedin.com" class="text-light" target="blank"><i class="socialicons bi bi-linkedin p-2"></i></a>
-                <a href="https://github.com" class="text-light" target="blank"><i class="socialicons bi bi-github p-2"></i></a>
-                <a href="https://twitter.com" class="text-light" target="blank"><i class="socialicons bi bi-twitter p-2"></i></a>
+                <a href="https://www.linkedin.com/in/khala-wright-3662b2266/" class="text-light" target="blank"><i class="socialicons bi bi-linkedin p-2"></i></a>
+                <a href="https://github.com/khalathecoder" class="text-light" target="blank"><i class="socialicons bi bi-github p-2"></i></a>
+             
             </div>
             <div class="col text-dark order-md-first text-md-start px-3"> &copy; 2023 Khala Wright</div>
         </div>
